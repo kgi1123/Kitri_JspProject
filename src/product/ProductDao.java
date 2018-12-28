@@ -2,14 +2,15 @@ package product;
 
 import java.util.ArrayList;
 
+import productReps.ProductReps;
+
 public interface ProductDao {
-	void insert(Product p);	// »óÇ°µî·Ï
-	void delete(int p_num);	// »óÇ°»èÁ¦
-	void update(Product p);	// »óÇ°¼öÁ¤
-	Product select(int p_num);	// »óÇ° »ó¼¼º¸±â
-	ArrayList<Product> selectAll(int optionVal, int p_cate1, int p_cate2);	// µî·Ï¼ø Á¤·Ä
-	ArrayList<Product> selectByTitle(String p_title);	// »óÇ° °Ë»ö
-	ArrayList<Product> selectBySeller(String p_writer);	// ÆÇ¸ÅÀÚ °Ë»ö
-	void updateHits(int num); // ¾÷µ¥ÀÌÆ® Á¶È¸¼ö
-	
+	void insert(Product p);	// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½
+	void delete(int p_num);	// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+	void update(Product p);	// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+	Product select(int p_num);	// ï¿½ï¿½Ç° ï¿½ó¼¼ºï¿½ï¿½ï¿½
+	ArrayList<Product> selectAll(int optionVal, int p_cate1, int p_cate2);	// ï¿½ï¿½Ï¼ï¿½ ï¿½ï¿½ï¿½ï¿½
+	ArrayList<Product> selectByTitle(String p_title);	// ï¿½ï¿½Ç° ï¿½Ë»ï¿½
+	ArrayList<Product> selectBySeller(String p_writer);	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½
+	void updateHits(int num);
 }

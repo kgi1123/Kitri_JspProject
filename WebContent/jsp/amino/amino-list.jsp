@@ -31,8 +31,8 @@
 	                                    <div class="sidebar_default category_grid">
 	                                        <div class="title_default">categories</div>
 	                                        <ul class="category_sidebar_grid">
-	                                            <li><a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=2&p_cate2=4"><span class="text">복합 아미노산</span></a></li>
-	                                            <li><a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=2&p_cate2=5"><span class="text">BCAA</span></a></li>
+	                                            <li><a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=2&p_cate2=4"><span class="text">BCAA</span></a></li>
+	                                            <li><a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=2&p_cate2=5"><span class="text">복합 아미노산</span></a></li>
 	                                            <li><a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=2&p_cate2=6"><span class="text">EAA</span></a></li>
 	                                        </ul>
 	                                    </div>

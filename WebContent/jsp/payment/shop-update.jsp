@@ -14,12 +14,17 @@
 alert("하나의 후기만 작성이 가능합니다.");
 if (confirm("후기를 수정하시겠습니까?")){
 }else{
-    location.href="${pageContext.request.contextPath }/jsp/payment/shop-orderList.jsp";
+    location.href="${pageContext.request.contextPath }/MyOrderListController";
 }
 
 $(document).ready(function() {
    $('#update_btn').click(function() {
       $('#update_form').submit();
+   });
+   
+   $('#del_btn1').click(function() {
+	   $('#update_form').attr('action', "${pageContext.request.contextPath }/ProductRepsDeleteController");
+	   $('#update_form').submit();
    });
 });
 
@@ -78,12 +83,14 @@ function len_chk(){
                                     <label>내용</label>
                                     <textarea id="content1" name="preps_content " onkeyup="len_chk()" style="width: 600px;height: 42px;resize:none;">${pdr.preps_content}</textarea>
                                  </div>
-                                 <c:if test = "${pdr.preps_img != null}">
+                                 
                                  <div class="input-field">
                                     <label>이미지</label> <input type="file" name="preps_img"> 
-                                    <img style="width:132px;height:155px" src="/img/${pdr.preps_img}">
+                                    <c:if test = "${pdr.preps_img != null}">
+                                    	<img style="width:132px;height:155px" src="/img/${pdr.preps_img}">
+                                    </c:if>
                                  </div>
-                                 </c:if>
+                                 
                                  <a href="#" class="button-contact" id="update_btn">글 수정</a>
                                  <a href="#" class="button-contact" id="del_btn1">글 삭제</a>
                               </form>

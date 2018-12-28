@@ -23,7 +23,7 @@ public class DBConnect {
 			//드라이버로드
 			Class.forName(jdbc_driver);
 			//디비연결(커넥션수립)
-			conn = DriverManager.getConnection(jdbc_url, "hr", "hr");
+			conn = DriverManager.getConnection(jdbc_url, "scott", "tiger");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

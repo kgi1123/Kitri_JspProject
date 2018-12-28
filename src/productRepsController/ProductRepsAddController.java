@@ -21,7 +21,7 @@ import productReps.ProductRepsServiceImpl;
  * Servlet implementation class ProductRepsAddController
  */
 
-@MultipartConfig(location="C:\\temp", maxFileSize=-1)
+@MultipartConfig(location="D:\\Å°Æ®¸®\\JSP", maxFileSize=-1)
 @WebServlet("/ProductRepsAddController")
 public class ProductRepsAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public class ProductRepsAddController extends HttpServlet {
 		System.out.println(preps_writer);
 		int preps_star = Integer.parseInt(request.getParameter("preps_star"));
 		String preps_content = request.getParameter("preps_content");
-		String path="jsp/payment/shop-orderList.jsp";
+		String path="/MyOrderListController";
 		String name = "";
 		
 		Part img1 = request.getPart("preps_img");
@@ -62,7 +62,7 @@ public class ProductRepsAddController extends HttpServlet {
 		long size = img1.getSize();
 		
 		if (size > 0) {
-			img1.write("D:\\kitri java\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\img\\" + name);
+			img1.write(request.getContextPath()+"\\WebContent\\images\\product\\" + name);
 			img1.delete();
 		}	
 		

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dbconn.DBConnect;
+import productReps.ProductReps;
 
 public class ProductDaoImpl implements ProductDao{
 	private DBConnect db;
@@ -65,7 +66,7 @@ public class ProductDaoImpl implements ProductDao{
 	public void update(Product p) {
 		conn = db.getConnection();
 		
-		String sql = "update shop_product set p_name=?, p_date=sysdate, p_contents=?, p_img1=?, p_price=?, p_quantity=?, p_cate1=?, p_cate2=?, p_img2=? where p_num=?";
+		String sql = "update shop_product set p_name=?, p_date=sysdate, p_contents=?, p_img1=?, p_price=?, p_quantity=?, p_eval=?, p_cate1=?, p_cate2=?, p_img2=? where p_num=?";
 		PreparedStatement pstmt;
 		
 		try {
@@ -76,6 +77,7 @@ public class ProductDaoImpl implements ProductDao{
 			pstmt.setString(3, p.getP_img1());
 			pstmt.setInt(4, p.getP_price());
 			pstmt.setInt(5, p.getP_quantity());
+			pstmt.setDouble(6, p.getP_eval());
 			pstmt.setInt(7, p.getP_cate1());
 			pstmt.setInt(8, p.getP_cate2());
 			pstmt.setString(9, p.getP_img2());
@@ -122,7 +124,7 @@ public class ProductDaoImpl implements ProductDao{
 	}
 
 	@Override
-	public ArrayList<Product> selectAll(int optionVal, int p_cate1, int p_cate2) {	// select id=gender1°ªÀÇ optionvalue °ª¿¡ µû¶ó sql ¹®ÀÌ ´Þ¶óÁ®¾ßÇÔ
+	public ArrayList<Product> selectAll(int optionVal, int p_cate1, int p_cate2) {	// select id=gender1ï¿½ï¿½ï¿½ï¿½ optionvalue ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ sql ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ResultSet rs;
 		ArrayList<Product> list = new ArrayList<Product>();
 		
@@ -131,10 +133,10 @@ public class ProductDaoImpl implements ProductDao{
 		String sql = "";
 		if(p_cate2 == 0) {
 			switch(optionVal) {
-			case 0:	// ÃÖ½Å¼ø
+			case 0:	// ï¿½Ö½Å¼ï¿½
 				sql = "select * from product where p_cate1=? or p_cate2=0 order by p_num desc";
 				break;
-			case 1:	// ¸®ºä¸¹Àº¼ø
+			case 1:	// ï¿½ï¿½ï¿½ä¸¹ï¿½ï¿½ï¿½ï¿½
 				sql = "select count(*), p.p_num, p.p_writer, p.p_name, p.p_date, p.p_hits, p.p_contents, p.p_img1, p.p_price, p.p_quantity, p.p_eval, p.p_cate1, p.p_cate2, p.p_img2 "
 						+ "from product p join productReps pr "
 						+ "on p.p_num = pr.preps_p_num "
@@ -142,10 +144,10 @@ public class ProductDaoImpl implements ProductDao{
 						+ "group by p.p_num, p.p_writer, p.p_name, p.p_date, p.p_hits, p.p_contents, p.p_img1, p.p_price, p.p_quantity, p.p_eval, p.p_cate1, p.p_cate2, p.p_img2 "
 						+ "order by 1 desc;";
 				break;
-			case 2:	// °¡°Ý³·Àº¼ø
+			case 2:	// ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½
 				sql = "select * from product where p_cate1=? or p_cate2=? order by p_price";
 				break;
-			case 3:	// °¡°Ý ³ôÀº¼ø
+			case 3:	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				sql = "select * from product where p_cate1=? or p_cate2=? order by p_price desc";
 				break;
 			default:
@@ -154,10 +156,10 @@ public class ProductDaoImpl implements ProductDao{
 			}
 		} else {
 			switch(optionVal) {
-			case 0:	// ÃÖ½Å¼ø
+			case 0:	// ï¿½Ö½Å¼ï¿½
 				sql = "select * from product where p_cate1=? and p_cate2=? order by p_num desc";
 				break;
-			case 1:	// ¸®ºä¸¹Àº¼ø
+			case 1:	// ï¿½ï¿½ï¿½ä¸¹ï¿½ï¿½ï¿½ï¿½
 				sql = "select count(*), p.p_num, p.p_writer, p.p_name, p.p_date, p.p_hits, p.p_contents, p.p_img1, p.p_price, p.p_quantity, p.p_eval, p.p_cate1, p.p_cate2, p.p_img2 "
 						+ "from product p join productReps pr "
 						+ "on p.p_num = pr.preps_p_num "
@@ -165,10 +167,10 @@ public class ProductDaoImpl implements ProductDao{
 						+ "group by p.p_num, p.p_writer, p.p_name, p.p_date, p.p_hits, p.p_contents, p.p_img1, p.p_price, p.p_quantity, p.p_eval, p.p_cate1, p.p_cate2, p.p_img2 "
 						+ "order by 1 desc;";
 				break;
-			case 2:	// °¡°Ý³·Àº¼ø
+			case 2:	// ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½ï¿½ï¿½
 				sql = "select * from product where p_cate1=? and p_cate2=? order by p_price";
 				break;
-			case 3:	// °¡°Ý ³ôÀº¼ø
+			case 3:	// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				sql = "select * from product where p_cate1=? and p_cate2=? order by p_price desc";
 				break;
 			default:
@@ -272,20 +274,20 @@ public class ProductDaoImpl implements ProductDao{
 	@Override
 	public void updateHits(int num) {
 		// TODO Auto-generated method stub
-		// 1. Ä¿³Ø¼Ç ¼ö¸³
+		// 1. Ä¿ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½
 		Connection conn = db.getConnection();
 		
-		// 2. sql¹® ÀÛ¼º
+		// 2. sqlï¿½ï¿½ ï¿½Û¼ï¿½
 		String sql = "update product set p_hits=p_hits+1 where p_num=?";
 		PreparedStatement pstmt;
 		try {
-			// 3. sql·Î PreparedStatment °´Ã¼ »ý¼º
+			// 3. sqlï¿½ï¿½ PreparedStatment ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			pstmt = conn.prepareStatement(sql);
 			
-			// 4. ?Ç¥ ¸ÅÄª param1:?Ç¥ ¼ø¼­ / param2:±× À§Ä¡¿¡ µé¾î°¥ °ª
+			// 4. ?Ç¥ ï¿½ï¿½Äª param1:?Ç¥ ï¿½ï¿½ï¿½ï¿½ / param2:ï¿½ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ ï¿½ï¿½î°¥ ï¿½ï¿½
 			pstmt.setInt(1, num);
 			
-			// 5. ½ÇÇà
+			// 5. ï¿½ï¿½ï¿½ï¿½
 			pstmt.executeUpdate(); //insert, update, delete
 			// pstmt.executeQuery() : select
 		} catch (SQLException e) {
@@ -294,6 +296,4 @@ public class ProductDaoImpl implements ProductDao{
 			db.disConn();
 		}		
 	}
-	
-	
 }

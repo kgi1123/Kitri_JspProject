@@ -63,8 +63,8 @@ function len_chk(){
 											<div class="input-field">
 												<label>별점</label>
 												<div class="Container" >
-												  <font size = 2 id = "slider_value_view">0</font>						  
-												  <input style = "width:80%;" class="slider_range" type="range" min="0" max="5" step="1" name="preps_star"></input>						  
+												  <font size=2 id = "slider_value_view">3</font>						  
+												  <input style = "width:80%;" class="slider_range" value="3" type="range" min="0" max="5" step="1" name="preps_star"></input>						  
 												</div>
 											</div>
 											<div class="input-field">

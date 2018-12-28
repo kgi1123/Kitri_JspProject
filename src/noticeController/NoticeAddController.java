@@ -18,7 +18,7 @@ import notice.NoticeServiceImpl;
 /**
  * Servlet implementation class noticeAddController
  */
-@MultipartConfig(location="C:\\temp", maxFileSize=-1)
+@MultipartConfig(location="D:\\키트리\\JSP", maxFileSize=-1)
 @WebServlet("/NoticeAddController")
 public class NoticeAddController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -61,7 +61,7 @@ public class NoticeAddController extends HttpServlet {
 			System.out.println(name);
 			
 			// 업로드된 파일을 저장
-			img1.write("C:\\Users\\KITRI\\Desktop\\KITRI\\JAVA\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\img\\" + name);
+			img1.write(request.getContextPath()+"\\WebContent\\images\\product\\" + name);
 			img1.delete();
 		}		
 		

@@ -220,7 +220,7 @@
 	                            <div class="row">
 	                                <div class="col-lg-6 col-md-6">
 	                                    <div class="wrap_banner_left">
-	                                        <a href="${pageContext.request.contextPath }/jsp/protein/protein-list.jsp">
+	                                        <a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=3&p_cate2=0">
 	                                            <div class="banner_left">
 	                                                <img class="img-responsive" src="${pageContext.request.contextPath }/images/banner/img1_banner_v2.jpg" alt=""/>
 	                                                <div class="caption_banner_left animated animate3">
@@ -236,7 +236,7 @@
 	                                            <div class="row">
 	                                                <div class="col-lg-6 col-md-6">
 	                                                    <div class="wrap_banner_top_left">
-	                                                        <a href="${pageContext.request.contextPath }/jsp/booster/booster-list.jsp">
+	                                                        <a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=1&p_cate2=0">
 	                                                            <div class="banner_top_left">
 	                                                                <img src="${pageContext.request.contextPath }/images/banner/img2_banner_v2.jpg" alt="" class="img-responsive">
 	                                                                <div class="caption_banner_left_left animated animate4">
@@ -248,7 +248,7 @@
 	                                                </div>
 	                                                <div class="col-lg-6 col-md-6">
 	                                                    <div class="wrap_banner_top_right">
-	                                                        <a href="${pageContext.request.contextPath }/jsp/vitamin/vitamin-list.jsp">
+	                                                        <a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=4&p_cate2=0">
 	                                                            <div class="banner_top_right">
 	                                                                <img src="${pageContext.request.contextPath }/images/banner/img3_banner_v2.jpg" alt="" class="img-responsive">
 	                                                                <div class="caption_banner_left_right animated animate5">
@@ -261,7 +261,7 @@
 	                                            </div>
 	                                        </div>
 	                                        <div class="banner_bottom">
-	                                            <a href="${pageContext.request.contextPath }/jsp/exerciseGoods/exercise-list.jsp">
+	                                            <a href="${pageContext.request.contextPath }/ProductListController?optionVal=0&p_cate1=5&p_cate2=0">
 	                                                <div class="wrap_banner_bottom">
 	                                                    <img src="${pageContext.request.contextPath }/images/banner/img4_banner_v2.jpg" alt="" class="img-responsive img_banner_bottom">
 	                                                    <div class="caption_banner_left_right animated animate6">
@@ -782,22 +782,6 @@
 	                                <p class="note">치킨을 맛있게 먹으면 치킨은 살안쪄요. 내가 쪄요.</p>
 	                                <h3 class="logan_cee">박노율</h3>	
 	                                <p class="web_designer">팀장</p>
-	                            </div>
-	                        </div>
-	                        <div class="item">
-	                            <div class="caption">
-	                                <p><span aria-hidden="true" class="icon_quotations_alt quotation"></span></p>
-	                                <p class="note">This theme is beautiful, elegant and support is the first class! I’ve been able to build an amazing site in just a minute. Thank you for creating an impressive PSD Template</p>
-	                                <h3 class="logan_cee">logan cee</h3>
-	                                <p class="web_designer">Web designer</p>
-	                            </div>
-	                        </div>
-	                        <div class="item">
-	                            <div class="caption">
-	                                <p><span aria-hidden="true" class="icon_quotations_alt quotation"></span></p>
-	                                <p class="note">This theme is beautiful, elegant and support is the first class! I’ve been able to build an amazing site in just a minute. Thank you for creating an impressive PSD Template</p>
-	                                <h3 class="logan_cee">logan cee</h3>
-	                                <p class="web_designer">Web designer</p>
 	                            </div>
 	                        </div>
 	                    </div>

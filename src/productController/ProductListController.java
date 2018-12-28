@@ -34,7 +34,6 @@ public class ProductListController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		ProductService service = new ProductServiceImpl(new ProductDaoImpl());
 		int optionVal = Integer.parseInt(request.getParameter("optionVal"));
 		int p_cate1 = Integer.parseInt(request.getParameter("p_cate1"));
@@ -62,8 +61,8 @@ public class ProductListController extends HttpServlet {
 			break;
 		}
 		
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher(result);
+		RequestDispatcher dispatcher = 
+				request.getRequestDispatcher(result);
 		if(dispatcher != null) {
 			dispatcher.forward(request, response);
 		}

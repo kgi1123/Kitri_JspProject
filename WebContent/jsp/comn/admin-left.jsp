@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
     <div class="sidebar" data-color="purple" data-background-color="black" data-image="${pageContext.request.contextPath }/assets/img/sidebar-2.jpg">
       <!--
@@ -20,14 +21,16 @@
               <p>Dashboard</p>
             </a>
           </li>
+          <c:if test="${sessionScope.m_id eq 'admin' }">
           <li class="nav-item ">
             <a class="nav-link" href="${pageContext.request.contextPath }/MemberListController">
               <i class="material-icons">person</i>
               <p>User List</p>
             </a>
           </li>
+          </c:if>
           <li class="nav-item ">
-            <a class="nav-link" href="${pageContext.request.contextPath }/jsp/admin/product-list.jsp">
+            <a class="nav-link" href="${pageContext.request.contextPath }/AdminListController?optionVal=0&p_cate1=1&p_cate2=1">
               <i class="material-icons">content_paste</i>
               <p>Table List</p>
             </a>

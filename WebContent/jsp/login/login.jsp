@@ -15,7 +15,8 @@
 <!-- <script type="text/javascript" src="//code.jquery.com/jquery-3.3.1.min.js"></script> -->
 <!-- <script src="/strong912/js/signCheck.js" charset="utf-8"></script> -->
 <script type="text/javascript">
-var check;
+var checkId;
+var checkEmail;
 var pwd1;
 var pwd2;
 
@@ -41,26 +42,57 @@ $(document).ready(function(){
 	   $('#tab-v8-2').addClass('active').addClass('in');
 	}
 	
+	//아이디 중복 체크
 	$('#signId').blur(function(){
 		$.ajax({
 			type:"post",
-			url:"/strong912/MemberCheckController",
+			url:"${pageContext.request.contextPath }/MemIdCheckController",
 			data:{
 				"signId":$('#signId').val()
 			},
 			success:function(data) {
 				if($.trim(data) == "YES") {
 					$('#checkIdMsg').html('<b style="font-size:14px;color:blue">사용 가능한 아이디입니다.</b>');
-					check=true;
+					checkId=true;
 				} else if($.trim(data) == "NO") {
 					$('#checkIdMsg').html('<b style="font-size:14px;color:red">중복된 아이디입니다.</b>');
-					check=false;
+					checkId=false;
 				} else {
 					$('#checkIdMsg').html('<b style="font-size:14px;color:red">아이디를 입력해주세요.</b>');
-					check=false;
+					checkId=false;
 				}
 			}
 		});
+	});
+	//이메일 중복 체크
+	$('#signEmail').blur(function(){
+		var signEmail = $('#signEmail').val()
+		$.ajax({
+			type:"post",
+			url:"${pageContext.request.contextPath }/MemEmailCheckController",
+			data:{
+				"signEmail": signEmail
+			},
+			success:function(data) {
+				if($.trim(data) == "YES") {
+					var check1 = check(signEmail);
+					if(check(signEmail)) {
+						$('#checkEmailMsg').html('<b style="font-size:14px;color:blue">사용 가능한 이메일입니다.</b>');
+						checkEmail=true;
+					} else {
+						$('#checkEmailMsg').html('<b style="font-size:14px;color:red">이메일 형식이 올바르지 않습니다.</b>');
+						checkEmail=false;
+					}
+				} else if($.trim(data) == "NO") {
+					$('#checkEmailMsg').html('<b style="font-size:14px;color:red">사용 중인 이메일입니다.</b>');
+					checkEmail=false;
+				} else if($.trim(data) == "NULL") {
+					$('#checkEmailMsg').html('<b style="font-size:14px;color:red">이메일을 입력해주세요.</b>');
+					checkEmail=false;
+				}
+			}
+		});
+		
 	});
 	
 	//패스워드 일치 체크
@@ -94,12 +126,16 @@ $(document).ready(function(){
 		signAddress2 = $('#signAddress2').val();
 		signEmail = $('#signEmail').val();
 		grant = $('#grant').val();
-		if(signId == "" || signPassword =="" || signPasswordcheck == "" || signName == "" || signTel == "" || signAddress == "" || signAddress1 == "" || signAddress2 == "" || signEmail == "" || grant == "") {
+		if(signId == "" || signPassword =="" || signPasswordcheck == "" || signName == "" || signTel == "" || signAddress == "" || signAddress1 == "" || signAddress2 == "" || grant == "") {
 			alert("값을 입력해주세요");
 		} else {
 			if(signPassword == signPasswordcheck) {
-	            if(check){
-	               $('#join_form').submit();
+	            if(checkId){
+	            	if(checkEmail) {
+	            		$('#join_form').submit();
+	            	} else {
+	            		alert('사용가능한 이메일을 입력해주세요.');
+	            	}
 	            } else {
 	               alert('사용가능한 아이디를 입력해주세요.');
 	            }
@@ -107,11 +143,17 @@ $(document).ready(function(){
 	            $('#signPassword').val("");
 	            $('#signPasswordcheck').val("");
 	            alert("패스워드가 일치하지 않습니다.");
-	            
 	         }
-		}		
+		}				
 	});
 	
+	
+	$('#pwd_find_btn').click(function() {
+		//location.href='${pageContext.request.contextPath }/jsp/login/pwd-find.jsp';
+		$('div.modal').modal({remote : '${pageContext.request.contextPath }/jsp/login/pwd-find.jsp'});
+	});
+	
+
 	function getParameterByName(name) {
 	    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
 	    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
@@ -120,7 +162,16 @@ $(document).ready(function(){
 	}
 });
 
-	
+// 이메일 형식 체크
+function check(email) {		
+	var filter = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+	if (filter.test(email)) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
 
 </script>
 
@@ -165,7 +216,7 @@ $(document).ready(function(){
 		                                                        <input type="checkbox" value="yes" name="ship_address" id="logged_in">
 		                                                        <label for="logged_in">로그인 상태 유지</label>
 		                                                    </div>
-		                                                    <a href="" class="forgot_password">비밀번호찾기</a>
+		                                                    <a href="#" class="forgot_password" id="pwd_find_btn">비밀번호찾기</a>
 		                                                </div>
 		                                                <div class="clearfix"></div>
 		                                                <div class="login_submit"><a href="#" id="login_submit_btn">Login</a></div>
@@ -173,6 +224,14 @@ $(document).ready(function(){
 		                                                <ul class="your_social">
 		                                                    <li class=""><a href="" class="color-blue"><span aria-hidden="true" class="social_facebook"></span><span class="text_social">facebook</span></a></li>
 		                                                </ul>
+		                                                <!-- 패스워드 찾기 모달  -->
+		                                                <div class="modal fade">
+															<div class="modal-dialog">
+																<div class="modal-content">
+																	<!-- remote ajax call이 되는영역 -->
+																</div>
+															</div>
+														</div>
 													</form>	                                                
 	                                            </div>
 	                                            <div class="tab-pane fade" id="tab-v8-2">
@@ -191,12 +250,12 @@ $(document).ready(function(){
 		                                                </div>
 		                                                <input type="text" class="form-control" id="signAddress1" name="signAddress1" placeholder="도로명주소">
 		                                                <input type="text" class="form-control" id="signAddress2" name="signAddress2" placeholder="상세주소">
+		                                                <div id="checkEmailMsg"></div>
 		                                                <input type="text" class="form-control" id="signEmail" name="signEmail" placeholder="이메일">
 														<div>
 	                                                	<label>
 	                                                        <input type="radio" name="grant" value="2" style=" width: 17px; height: 17px; line-height: 17px; font-size: 11px; color: white; ">
 	                                                        	판매자
-	                                                       
                                                         </label>
                                                         <label>
 	                                                        <input type="radio" name="grant" value="3" style=" width: 17px; height: 17px; line-height: 17px; font-size: 11px; color: white; ">
@@ -259,7 +318,7 @@ $(document).ready(function(){
                 document.getElementById('signAddress').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('signAddress1').value = fullAddr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('address').focus();
+                document.getElementById('signAddress2').focus();
             }
         }).open();
     }

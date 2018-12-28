@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
-encoding//WebContent/jsp/supplements/supplements-getBoard.jsp=UTF-8
+encoding//src/liketoController/LiketoAddController.java=UTF-8
+encoding//src/liketoController/LiketoSubController.java=UTF-8
+encoding//src/productController/ProductViewController.java=UTF-8
+encoding//src/productRepsController/ProductRepsCheckController.java=UTF-8

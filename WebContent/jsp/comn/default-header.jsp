@@ -2,6 +2,37 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script type="text/javascript">
+//최근 본 바구니(쿠키불러오기)
+var nameArr2  = eval( '["'+$.cookie('productName')+'"]' );
+var pathArr2  = eval( '["'+$.cookie('productPath')+'"]' );
+var aHrefArr2 = eval( '["'+$.cookie('productA')+'"]' );
+
+nameArr3 = nameArr2.toString().split(',');
+pathArr3 = pathArr2.toString().split(',');
+aHrefArr3 = aHrefArr2.toString().split(',');
+
+$(document).ready(function() {
+	var $basket = $('#basket');
+
+	if (nameArr3.length != 1 ) {
+		for (var i=0; i < nameArr3.length; i++) {
+			
+			if (nameArr3[i] !== "null") {
+				str = "<tr>"
+				str += "<td style='padding: 10px;'><a href='"+aHrefArr3[i]+"'>"+nameArr3[i]+"</a></td>"
+				str += "<td><a href='"+aHrefArr3[i]+"'><img style=' width: 162px; height: 140px;' src='${pageContext.request.contextPath}/images/product/"+pathArr3[i]+"'></a></td>"
+				str += "</tr>"
+
+				$basket.prepend(str);
+			}
+		}
+	} else {
+		var str = "<tr><td colspan='2'>최근본상품이없습니다.</td></tr>"
+		$basket.prepend(str);
+	}
+	
+});
+
    $(document).ready(function(){
    
       $('#login-button').click(function(){
@@ -127,7 +158,7 @@
                                        </form>
                                     </c:when>
                                     <c:otherwise>
-                                       <form action="${pageContext.request.contextPath }/MemLoginController" id="loginPane" name="login_Pane">
+                                       <form action="${pageContext.request.contextPath }/MemLoginController" id="loginPane" name="login_Pane" method="post">
                                           <div>
                                              <input type="text" id="m_id" name="m_id" placeholder="아이디" style="vertical-align: 12px;width: 164px;">
                                              <input type="password" id="m_pwd" name="m_pwd" placeholder="비밀번호" style="vertical-align: 12px;width: 164px;">   
@@ -148,12 +179,15 @@
                 <div class="navcart-wrap">
                     <div class="navbar-minicart">
                         <a class="minicart-link" href="#">
-                            <span class="minicart-icon"><i class="fa fa-eye"></i><span>(0)</span></span>
+                            <span class="minicart-icon"><i class="fa fa-eye"></i><span></span></span>
                         </a>
                         <div class="mega_drop_menu mega_dropdown_nav_cart_v1">
                             <div class="menu-menu">
                                 <ul class="block_level2">
-                                    <li class="level-02 contact">최근 본 상품이 없습니다.</li>
+                                    <li class="level-02 contact">
+                                    	<table id="basket">
+                                    	</table>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -188,14 +222,14 @@
                     <div class="menu-menu">
                         <ul class="block_level2">
                         	<li class="level-02"><a href="${pageContext.request.contextPath }/MemInfoController" id="myInfo-btn">나의정보</a></li>
-                            <li class="level-02"><a href="">주문목록</a></li>
+                            <li class="level-02"><a href="${pageContext.request.contextPath }/MyOrderListController">주문목록</a></li>
                             <li class="level-02"><a href="">1:1문의</a></li>
                             <li class="level-02"><a href="">고객센터</a></li>
  							<c:if test="${sessionScope.m_type=='관리자' }">
                             	<li class="level-02"><a href="${pageContext.request.contextPath }/AdminListController?optionVal=0&p_cate1=1&p_cate2=1">관리모드</a></li>
                             </c:if>
                             <c:if test="${sessionScope.m_type=='판매자' }">
-                            	<li class="level-02"><a href="#">상품등록</a></li>
+                            	<li class="level-02"><a href="${pageContext.request.contextPath }/AdminListController?optionVal=0&p_cate1=1&p_cate2=1">상품등록</a></li>
                             </c:if>
                         </ul>
                     </div>

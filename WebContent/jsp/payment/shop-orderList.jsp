@@ -51,49 +51,32 @@
 									<tr>
 			                            <th>이미지</th>
 			                            <th>물품명</th>
-			                            <th>구매자이름</th>
+			                            <th>판매자</th>
 			                            <th>결제상태</th>
 			                            <th>주문날짜</th>
 			                            <th>옵션</th>
 		                            </tr>
-			                        <tr>
-			                            <td><img style=" width: 132px; height: 155px;" src="/strong912/images/product_detail/pro1.jpg"></td>
-			                            <td>볼텍스<br>코드번호 (286)</td>
-			                            <td>박노율</td>
-			                            <td>결제완료</td>
-			                            <td>2018.10.23</td>
-			                            <td style=" text-align: center; ">
-				                            <div class="introduce_product" style="padding: 0px;margin: 0px">
-				                            	<div class="buy_on_ebay">
-		                                            <a class="send" href="#">후기작성</a>
+		                            <c:forEach var="i" items="${list }">
+				                        <tr>
+				                            <td><img style=" width: 132px; height: 155px;" src="${pageContext.request.contextPath}/images/product/${i.p_img1}"></td>
+				                            <td>${i.o_goods }<br>코드번호 (${i.o_p_num })</td>
+				                            <td>${i.o_seller }</td>
+				                            <td>${i.o_pay }</td>
+				                            <td>${i.o_date }</td>
+				                            <td style=" text-align: center; ">
+					                            <div class="introduce_product" style="padding: 0px;margin: 0px">
+					                            	<div class="buy_on_ebay">
+			                                            <a class="send" href="#">후기작성</a>
+			                                        </div>
 		                                        </div>
-	                                        </div>
-	                                        <div class="introduce_product" style="padding: 0px;margin: 0px">
-				                            	<div class="buy_on_ebay">
-		                                            <a href="#">상세주문</a>
+		                                        <div class="introduce_product" style="padding: 0px;margin: 0px">
+					                            	<div class="buy_on_ebay">
+			                                            <a href="#">상세주문</a>
+			                                        </div>
 		                                        </div>
-	                                        </div>
-	                                   	</td>
-			                        </tr>
-			                        <tr>
-			                            <td><img style=" width: 132px; height: 155px;" src="/strong912/images/product_detail/pro1.jpg"></td>
-			                            <td>뱅 마스터 블래스터<br>코드번호 (213)</td>
-			                            <td>박노율</td>
-			                            <td>결제중</td>
-			                            <td>2018.10.23</td>
-			                            <td style=" text-align: center; ">
-				                            <div class="introduce_product" style="padding: 0px;margin: 0px">
-				                            	<div class="buy_on_ebay">
-		                                            <a class="send" href="#">후기작성</a>
-		                                        </div>
-	                                        </div>
-	                                        <div class="introduce_product" style="padding: 0px;margin: 0px">
-				                            	<div class="buy_on_ebay">
-		                                            <a class="" href="#">상세주문</a>
-		                                        </div>
-	                                        </div>
-	                                   	</td>
-			                        </tr>
+		                                   	</td>
+				                        </tr>
+				                    </c:forEach>
 				                </table>
 				        	</div>
 				        	<div class="content_categories_grid_sidebar_left content_categories_grid_full_width">

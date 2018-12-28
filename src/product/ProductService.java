@@ -2,6 +2,8 @@ package product;
 
 import java.util.ArrayList;
 
+import productReps.ProductReps;
+
 public interface ProductService {
 	void addProduct(Product p);
 	void editProduct(Product p);
@@ -11,5 +13,4 @@ public interface ProductService {
 	ArrayList<Product> getAll(int optionVal, int p_cate1, int p_cate2);
 	ArrayList<Product> getByTitle(String p_title);
 	ArrayList<Product> getBySeller(String p_writer);
-	
 }

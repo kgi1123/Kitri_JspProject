@@ -37,6 +37,12 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public void changePwd(String id, String pwd) {
+		// TODO Auto-generated method stub
+		dao.updatePwd(id, pwd);
+	}
+	
+	@Override
 	public void out(String id) {
 		// TODO Auto-generated method stub
 		dao.delete(id);
@@ -52,6 +58,11 @@ public class MemberServiceImpl implements MemberService {
 		return dao.check_type(m_type);
 	}
 	@Override
+	public boolean check_email(String email) {
+		// TODO Auto-generated method stub
+		return dao.check_email(email);
+	}
+	@Override
 	public int get_type(String id) {
 		// TODO Auto-generated method stub
 		return dao.get_type(id);
@@ -61,5 +72,4 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return dao.selectAll();
 	}
-
 }

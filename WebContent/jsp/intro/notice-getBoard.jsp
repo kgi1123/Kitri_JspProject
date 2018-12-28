@@ -65,7 +65,7 @@ $(document).ready(function(){
 	                                            <label>이미지</label>
 	                                            <table border="1">
 	                                            	<tr>
-	                                            		<td><img class="notice-img" src="/img/${n.n_img }" alt="member1" title="member1"></td>
+	                                            		<td><img class="notice-img" src="${pageContext.request.contextPath}/images/product/${n.n_img }" alt="member1" title="member1"></td>
 	                                            	</tr>
 	                                            </table>
 	                                        </div>

@@ -3,6 +3,7 @@ package productController;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import product.ProductServiceImpl;
 /**
  * Servlet implementation class ProductEditController
  */
+@MultipartConfig(location="D:\\Å°Æ®¸®\\JSP", maxFileSize=-1)
 @WebServlet("/ProductEditController")
 public class ProductEditController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -50,39 +52,11 @@ public class ProductEditController extends HttpServlet {
 		
 		Product p = new Product(num, "", name, null, 0, contents, img1, price, quantity, 0, cate1, cate2, img2);
 		
-		String name2 = "";
-	      for(int i=0; i<2; i++) {
-	         Part imgFile = request.getPart("p_img" + (i+1));
-	         
-	         if(imgFile != null && imgFile.getSize()>0) {
-	            String[] header = imgFile.getHeader("Content-Disposition").split(";");
-	            for (String a : header) {
-	               if (a.trim().startsWith("filename")) {
-	                  name2 = a.substring(a.lastIndexOf("=") + 2, a.length()-1).trim();   
-	               }
-	            }   
-	         }
-	         
-	         long size = imgFile.getSize();
-	         if (size > 0) {
-	            imgFile.write("C:\\Users\\KITRI\\Desktop\\KITRI\\JAVA\\workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\webapps\\img\\" + name2);
-	            
-	            switch(i) {
-	            case 0:
-	               p.setP_img1(name2);
-	               break;
-	            case 1:
-	               p.setP_img2(name2);
-	               break;
-	            }
-	         }
-	         imgFile.delete();
-	      }
 		
 		
 		service.editProduct(p);
-
-		response.sendRedirect("AdminListListController?optionVal=0&p_cate1="+cate1+"&p_cate2="+cate2);
+														
+		response.sendRedirect("AdminListController?optionVal=0&p_cate1="+cate1+"&p_cate2="+cate2);
 	}
 
 	/**

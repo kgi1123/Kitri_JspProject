@@ -10,6 +10,14 @@
 <!-- 헤드 -->
 <jsp:include page="/jsp/comn/default-head.jsp" />
 </head>
+<script>
+	$(document).ready(function(){
+		$('#payment').click(function(){
+			$('#f').attr('action', "${pageContext.request.contextPath}/MyOrderAddController");
+			$('#f').submit();
+		});
+	});
+</script>
 <body>
 	<div class="wrapper ver2">
 	
@@ -23,62 +31,70 @@
 	            	<jsp:include page="/jsp/payment/shop-banner.jsp" />
 	                <div class="container-full">
 	                    <div class="container">
-	                        <div class="row">
-	                            <div class="col-md-6">
-	                                <div class="check_out_left default_check_out">
-	                                    <div class="billing-fields billing-fields-1" style=" padding-bottom: 39px; ">
-	                                        <h2>배송지 정보</h2>
-	                                        <div class="input-field">
-	                                            <label>보내는 사람 <span class="start_checkout">*</span></label>
-												고정 아이디
-	                                        </div><!-- .input-field -->
-	                                        <div class="input-field">
-	                                            <label>받는 사람 <span class="start_checkout">*</span></label>
-	                                            <input name="first-name" type="text" placeholder="이름" class="input-text" required="">
-	                                        </div><!-- .input-field -->
-	
-	                                        <div class="input-field">
-	                                            <label>전화번호 <span class="start_checkout">*</span></label>
-	                                            <input name="first-name" type="text" placeholder="00000000000" class="input-text" required="">
-	                                        </div><!-- .input-field -->
-	                                        
-	                                        <div class="input-field">
-	                                            <label>배송요구 사항 <span class="start_checkout">*</span></label>
-	                                            <input name="first-name" type="text" placeholder="50자이내로" class="input-text" required="">
-	                                        </div><!-- .input-field -->
-	                                        
-	                                        <div class="input-field" style="width:100%">
-	                                        	<label>주소<span id="address" class="start_checkout">*</span></label>
-                                               	<input type="text" class="input-text" id="signAddress" placeholder="우편번호" style="width:30%;float:left">
-                                               	<input type="button" style="width:129px;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
-                                               	<input type="text" class="input-text" id="signAddress1" placeholder="도로명주소">
-                                              	<input type="text" id="address" class="form-control" id="signAddress2" placeholder="상세주소">
-                                               	</div>
-	                                    	</div>
-	                                </div>
-	                            </div>
-	                            <div class="col-md-6">
-	                                <div class="check_out_right default_check_out">
-	                                    <div class="billing-fields">
-	                                        <h2>주문 상품</h2>
-	                                        <div class="your_order">
-	                                            <div class="input-field product_buy">
-	                                                <label><span class="country2">상품</span><span class="totals">금액</span></label>
-	                                                <p><a href=""> <span class="navy">하얀물약(1)</span></a><span class="price_navy">&#8361;75.20</span></p>
-	                                                <p><a href=""><span class="navy">주황물약(1)</span></a> <span class="price_navy">&#8361;75.20</span></p>
-	                                                <p><a href=""><span class="navy">빨간물약(1)</span></a> <span class="price_navy">&#8361;75.20</span></p>
-	                                            </div>
-	                                            <div class="input-field">
-	                                                <label class="title_order_totals"><span class="order_total">주문 총금액 :</span><span class="price_order_total">&#8361;105.00</span></label>
-	                                            </div>
-	                                        </div>
-	                                        <div class="place_order">
-	                                            <a href="" class="link_place_order">결제하기</a>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                            </div>
-	                        </div>
+	                    	<form action="#" method="post" id="f">
+		                        <div class="row">
+		                            <div class="col-md-6">
+		                                <div class="check_out_left default_check_out">
+		                                    <div class="billing-fields billing-fields-1" style=" padding-bottom: 39px; ">
+		                                        <h2>배송지 정보</h2>
+		                                        <div class="input-field">
+		                                            <label>판매자 <span class="start_checkout">*</span></label>
+													${p_writer }
+													<input type="hidden" name="o_buyer" value="${sessionScope.m_id }">
+		                                        </div><!-- .input-field -->
+		                                        <div class="input-field">
+		                                            <label>받는사람 이름 <span class="start_checkout">*</span></label>
+		                                            <input name="o_recipient" type="text" placeholder="이름" class="input-text">
+		                                        </div><!-- .input-field -->
+		
+		                                        <div class="input-field">
+		                                            <label>구매자 전화번호 <span class="start_checkout">*</span></label>
+		                                            <input name="o_phone" type="text" placeholder="전화번호" class="input-text">
+		                                        </div><!-- .input-field -->
+		                                        
+		                                        <div class="input-field">
+		                                            <label>배송요구 사항 <span class="start_checkout">*</span></label>
+		                                            <input name="o_req" type="text" placeholder="50자이내로" class="input-text">
+		                                        </div><!-- .input-field -->
+		                                        
+		                                        <div class="input-field" style="width:100%">
+		                                        	<label>주소<span id="address" class="start_checkout">*</span></label>
+	                                               	<input type="text" class="input-text form-control" id="signAddress" name="signAddress" placeholder="우편번호" style="width:30%;float:left">
+	                                               	<input type="button" style="width:129px;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기">
+	                                               	<input type="text" class="input-text form-control" id="signAddress1" name="signAddress1" placeholder="도로명주소">
+	                                              	<input type="text" class="form-control" id="signAddress2" name="signAddress2" placeholder="상세주소">
+	                                               	</div>
+		                                    	</div>
+		                                </div>
+		                            </div>
+		                            <div class="col-md-6">
+		                                <div class="check_out_right default_check_out">
+		                                    <div class="billing-fields">
+		                                        <h2>주문 상품</h2>
+		                                        <div class="your_order">
+		                                            <div class="input-field product_buy">
+		                                                <label><span class="country2">상품</span><span class="totals">금액</span></label>
+		                                                <p><a href=""> <span class="navy">${p_name }</span></a><span class="price_navy">${p_price }</span></p>
+		                                                <input type="hidden" name="p_name" value="${p_name }">
+		                                            </div>
+		                                            <div class="input-field">
+		                                                <label class="title_order_totals"><span class="order_total">주문 총금액 :</span><span class="price_order_total">&#8361;${p_price * o_qty}</span></label>
+		                                            </div>
+		                                            <div class="input-field">
+		                                                <label class="title_order_totals"><span class="order_total">주문 수량 :</span><span class="price_order_total">${o_qty }개</span></label>
+		                                                <input type="hidden" name="o_qty" value="${o_qty }">
+		                                                <input type="hidden" name="p_num" value="${p_num }">
+		                                                <input type="hidden" name="o_seller" value="${p_writer }">
+		                                            </div>
+		                                        </div>
+		                                        <div class="place_order">
+		                                            <a href="#" class="link_place_order" id="payment">결제하기</a>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+	                    	</form>
 	                    </div>
 	                </div>
 	            </div>
@@ -124,9 +140,10 @@
                 document.getElementById('signAddress').value = data.zonecode; //5자리 새우편번호 사용
                 document.getElementById('signAddress1').value = fullAddr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('address').focus();
+                document.getElementById('signAddress2').focus();
             }
         }).open();
     }
 </script>
 </html>
+

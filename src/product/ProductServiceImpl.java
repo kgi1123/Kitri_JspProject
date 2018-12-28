@@ -2,6 +2,8 @@ package product;
 
 import java.util.ArrayList;
 
+import productReps.ProductReps;
+
 public class ProductServiceImpl implements ProductService{
 	private ProductDao dao;
 	public ProductServiceImpl(ProductDao dao) {
@@ -25,7 +27,7 @@ public class ProductServiceImpl implements ProductService{
 		return dao.select(p_num);
 	}
 	@Override
-	public ArrayList<Product> getAll(int optionVal, int p_cate1, int p_cate2) {		// option value ÀÎÀÚ°ªÀ¸·Î ¿Í¾ßµÊ
+	public ArrayList<Product> getAll(int optionVal, int p_cate1, int p_cate2) {		// option value ï¿½ï¿½ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Í¾ßµï¿½
 		return dao.selectAll(optionVal, p_cate1, p_cate2);
 	}
 	@Override

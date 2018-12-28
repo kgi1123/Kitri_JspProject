@@ -1,6 +1,7 @@
 package memberController;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,20 +45,36 @@ public class MemEditFormController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		response.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
+		String path = null;
 		if(session != null) {
 			String id = (String) session.getAttribute("m_id");
 			m = service.getMember(id);
 			String addr = m.getM_address();
-			String[] address = addr.split(", ");
-			String address1 = address[0];
-			String address2 = address[1];
-			info.put("m", m);
-			info.put("address1", address1);
-			info.put("address2", address2);
+			try {
+				String[] address = addr.split(", ");
+				String address1 = address[0];
+				String address2 = address[1];
+				info.put("m", m);
+				info.put("address1", address1);
+				info.put("address2", address2);
+			}catch(ArrayIndexOutOfBoundsException e){
+				out.println("<script language='javascript'>");
+				out.println("alert('주소형식이 올바르지 않습니다.');");
+				out.println("location.href = 'javascript:history.go(-1);'");
+				//path = "jsp/login/custom-info.jsp";
+				out.println("</script>");
+				return;
+			}catch(Exception e){
+	            System.out.println(e.getMessage());
+	        }finally{
+	            System.out.println("주소 형식 체크실행완료");
+	        }
+			path ="jsp/login/custom-update.jsp";
 		}
 		request.setAttribute("info", info);
 		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("jsp/login/custom-update.jsp");
+				request.getRequestDispatcher(path);
 		if (dispatcher != null) {
 			dispatcher.forward(request, response);
 		}

@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+   .item.slick-slide.slick-current.slick-active {
+      max-width:420px !important;
+      max-height:420px !important;
+   }
+   
+   .product_zoom {
+       max-width: 420px !important;
+       max-height: 420px !important;
+   }
+</style>
 <title>Jakiro home full width v2</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-	.item.slick-slide.slick-current.slick-active {
-		max-width:420px !important;
-		max-height:420px !important;
-	}
-	
-	.product_zoom {
-	    max-width: 420px !important;
-    	max-height: 420px !important;
-	}
-</style>
-
 <!-- favicon -->
 <LINK REL="SHORTCUT ICON" HREF="${pageContext.request.contextPath }/images/favicon.ico" />
 <!--Google font-->
@@ -50,38 +49,4 @@
 <script src="${pageContext.request.contextPath }/js/vendor/jquery.fancybox.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/js/vendor/slick.min.js" type="text/javascript"></script>
 <script src="${pageContext.request.contextPath }/js/scollTop.js" type="text/javascript"></script>
-
-
-
-<script>
-$(document).ready(function() {
-
-   //댓글 좋아요 버튼
-   $('.wishlist a').click(function() {
-      
-      if ($(this).hasClass('text-primary')) 
-       { 
-           $(this).removeClass('text-primary').addClass('text-danger'); 
-           alert("좋아요.");
-       } 
-       else { 
-          $(this).removeClass('text-danger').addClass('text-primary'); 
-          alert('좋아요 취소.');
-       } 
-   });
-});
-
-//장바구니 이동버튼
-function goBasket(select) {
-   
-   if(select == 1) {
-      if(confirm("장바구니에 추가되었습니다. 장바구니로 이동하시겠습니까?")) {
-          alert("location.href='장바구니로 이동'");
-       }
-   } else {
-      if(confirm("결제하시겠습니까?")) {
-          alert("location.href='결제로 이동'");
-       }
-   }
-}
-</script>
+<script src="${pageContext.request.contextPath }/js/jquery.cookie.js"></script>

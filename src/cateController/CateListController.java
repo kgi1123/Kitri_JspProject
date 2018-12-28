@@ -38,9 +38,11 @@ public class CateListController extends HttpServlet {
 		request.setCharacterEncoding("euc-kr");
 		response.setContentType("text/html; charset=EUC-KR");
 		response.setCharacterEncoding("euc-kr");
+		
 		Service service = new ServiceImpl(new DaoImpl());
 		String table = request.getParameter("table");
 		int parent = Integer.parseInt(request.getParameter("parent"));
+		
 		ArrayList<Cate> list = service.getCates(parent, table);
 		request.setAttribute("list", list);
 		RequestDispatcher dispatcher = 

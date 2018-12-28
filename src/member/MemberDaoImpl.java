@@ -106,7 +106,26 @@ public class MemberDaoImpl implements MemberDao {
 			db.disConn();
 		}
 	}
+	@Override
+	public void updatePwd(String id, String pwd) {
+		// TODO Auto-generated method stub
+		Connection conn = db.getConnection();
 
+		String sql = "update member set m_pwd=? where m_id=?";
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, id);	
+
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			db.disConn();
+		}
+	}
 	@Override
 	public void delete(String id) {
 		// TODO Auto-generated method stub
@@ -168,7 +187,29 @@ public class MemberDaoImpl implements MemberDao {
 		}
 		return null;
 	}
-
+	@Override
+	public boolean check_email(String email) {
+		// TODO Auto-generated method stub
+		ResultSet rs;
+		boolean result = false;
+		Connection conn = db.getConnection();
+		String sql = "select m_email from member where m_email=?";
+		PreparedStatement pstmt;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				result = true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {//현재 메서드가 종료하기 전에 꼭 실행해야하는 코드 작성
+			db.disConn();
+		}
+		return result;
+	}
 	@Override
 	public ArrayList<Member> selectAll() {
 		ResultSet rs;

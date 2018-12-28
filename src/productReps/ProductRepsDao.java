@@ -1,5 +1,7 @@
 package productReps;
 
+import java.util.ArrayList;
+
 public interface ProductRepsDao {
 
 	void addProductReps(ProductReps pdr);
@@ -8,4 +10,11 @@ public interface ProductRepsDao {
 
 	void updatePdr(ProductReps pdr);
 
+	void deleteReps(int num, String writer);
+
+	int prepsRecSelect(int p_num);
+
+	void prepsRecAdd(int preps_num, int preps_rec);
+
+	ArrayList<ProductReps> pdrListSelect(int num);
 }

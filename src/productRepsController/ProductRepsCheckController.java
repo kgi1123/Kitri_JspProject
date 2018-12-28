@@ -49,18 +49,17 @@ public class ProductRepsCheckController extends HttpServlet {
 		System.out.println(pdr);
 		
 		if(pdr == null) {
-			System.out.println("후기 없으니 후기페이지 이동");
+			System.out.println("�썑湲� �뾾�쑝�땲 �썑湲고럹�씠吏� �씠�룞");
 			request.setAttribute("product_num", product_num);
 			request.setAttribute("product_name", product_name);
 			request.setAttribute("p_writer", p_writer);
-			path = "/jsp/payment/shop-review.jsp";
+			path = "jsp/payment/shop-review.jsp";
 		} else {
-			System.out.println("후기 있으니 수정페이지 이동");
+			System.out.println("�썑湲� �엳�쑝�땲 �닔�젙�럹�씠吏� �씠�룞");
 			request.setAttribute("pdr", pdr);
 			request.setAttribute("product_name", product_name);
 		    path="jsp/payment/shop-update.jsp";
 		}
-		
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 		if (dispatcher != null) {
